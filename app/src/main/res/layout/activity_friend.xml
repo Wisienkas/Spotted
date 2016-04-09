@@ -15,4 +15,29 @@
         android:layout_height="wrap_content"
         android:text="We are on friends Page!!"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/friend_search_field"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friedn_search_button_text"
+            android:onClick="searchForFriend"/>
+    </LinearLayout>
+
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:id="@+id/friend_listview"/>
+
+
 </LinearLayout>

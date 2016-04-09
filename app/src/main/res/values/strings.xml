@@ -7,4 +7,5 @@
     <string name="menu_friendlist_text">Manage Friends</string>
     <string name="menu_map_text">Watch Map</string>
     <string name="menu_configure_profile_text">Configure Profile</string>
+    <string name="friedn_search_button_text">Search</string>
 </resources>

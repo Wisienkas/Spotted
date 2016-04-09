@@ -1,9 +1,18 @@
 package io.mlh.spotted.spotted;
 
 import android.app.Application;
+import android.util.Log;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.mlh.spotted.spotted.Model.Connections;
 import io.mlh.spotted.spotted.Model.User;
 
 /**
@@ -22,5 +31,15 @@ public class SpottedApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Parse.initialize(this, APP_ID, CLIENT_KEY);
+        ParseQuery<ParseObject> query = new ParseQuery<>("Connection");
+        Log.i("PARSE_FETCH", "Starting to find all connections");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                Connections.getINSTANCE().setList(objects);
+                Log.i("PARSE_FETCH", "Found all connections, " + objects.size());
+            }
+        });
+
     }
 }
