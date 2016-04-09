@@ -4,4 +4,7 @@
     <string name="email_username">Email (username)</string>
     <string name="signup_text">You can sign up or go home!</string>
     <string name="login_button_text">Login!</string>
+    <string name="menu_friendlist_text">Manage Friends</string>
+    <string name="menu_map_text">Watch Map</string>
+    <string name="menu_configure_profile_text">Configure Profile</string>
 </resources>

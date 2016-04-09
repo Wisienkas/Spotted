@@ -1,6 +1,6 @@
 package io.mlh.spotted.spotted.Activities.Listeners;
 
-import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +10,8 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+import io.mlh.spotted.spotted.Activities.callback.ActivityLink;
+import io.mlh.spotted.spotted.MenuActivity;
 import io.mlh.spotted.spotted.Model.User;
 
 /**
@@ -19,12 +21,14 @@ public class LoginListener implements View.OnClickListener {
 
     private final EditText usernameTextfield;
     private final EditText passwordTextfield;
-    private final Context context;
+    private final ActivityLink activityLink;
 
-    public LoginListener(EditText usernameTextfield, EditText passwordTextfield, Context context) {
+    public LoginListener(EditText usernameTextfield,
+                         EditText passwordTextfield,
+                         ActivityLink activityLink) {
         this.usernameTextfield = usernameTextfield;
         this.passwordTextfield = passwordTextfield;
-        this.context = context;
+        this.activityLink = activityLink;
     }
 
     @Override
@@ -36,14 +40,21 @@ public class LoginListener implements View.OnClickListener {
                     @Override
                     public void done(ParseUser user, ParseException e) {
                         if (user != null) {
-                            User.user = user;
-                            Toast.makeText(context,
-                                    "Logged in!",
-                                    Toast.LENGTH_SHORT)
-                                    .show();
-                            Log.i("SPOTTED-PARSE", "User Logged in as: " + user.getUsername() + " Session Key: " + user.getSessionToken());
+                            // Successfull login!
+                            migrateToMenu(user);
                         }
                     }
                 });
+    }
+
+    private void migrateToMenu(ParseUser user) {
+        User.user = user;
+        Toast.makeText(activityLink.fetchContext(),
+                "Logged in!",
+                Toast.LENGTH_SHORT)
+                .show();
+        Log.i("SPOTTED-PARSE", "User Logged in as: " + user.getUsername() + " Session Key: " + user.getSessionToken());
+
+        activityLink.startActivity();
     }
 }
