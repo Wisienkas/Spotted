@@ -13,7 +13,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="We are on friends Page!!"/>
+        android:text="We are on friends Page!!"
+        android:id="@+id/output"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,14 +25,14 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:id="@+id/friend_search_field"
+            android:id="@+id/friend_add_field"
             />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/friedn_search_button_text"
-            android:onClick="searchForFriend"/>
+            android:text="@string/friend_search_button_text"
+            android:onClick="addFriends"/>
     </LinearLayout>
 
 

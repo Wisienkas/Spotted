@@ -12,12 +12,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,13 +45,17 @@ public class FriendActivity extends Activity implements Observer {
     private ListView listView;
     private FriendListAdapter adapter;
 
+    private TextView output;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend);
+        output = (TextView) findViewById(R.id.output);
         makeMyListView();
         // Will unfocus EditText, so keyboard is not shown initially
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        Connections.getINSTANCE().addObserver(this);
     }
 
     private void makeMyListView() {
@@ -63,6 +75,7 @@ public class FriendActivity extends Activity implements Observer {
     }
 
     private void insertIntoAdapter(List<ParseObject> data) {
+        adapter.clear();
         for (ParseObject po : data) {
             if(po.getString("user1").equalsIgnoreCase(User.user.getString("username"))) {
                 adapter.add(new Friend(po.getString("user2"), null, null));
@@ -70,5 +83,43 @@ public class FriendActivity extends Activity implements Observer {
                 adapter.add(new Friend(po.getString("user1"), null, null));
             }
         }
+    }
+
+    public void addFriends(View view) {
+        output.setText("Searching to add friend");
+        final String name = ((EditText) findViewById(R.id.friend_add_field)).getText().toString();
+        if(name.equalsIgnoreCase(User.user.getString("username"))) {
+            // You cannot link to yourself
+            return;
+        }
+        ParseQuery<ParseUser> query = new ParseQuery<>("_User");
+        //query.whereEqualTo("username", name);
+        query.findInBackground(new FindCallback<ParseUser>() {
+               @Override
+               public void done(List<ParseUser> objects, ParseException e) {
+                   if(objects != null && objects.size() > 0) {
+                       ParseObject parseObject = new ParseObject("Connection");
+                       parseObject.put("user1", User.user.getUsername());
+                       parseObject.put("user2", name);
+                       parseObject.saveInBackground(new SaveCallback() {
+                           @Override
+                           public void done(ParseException e) {
+                               if(e == null) {
+                                   Log.i("PARSE-SAVE", "Saved new Connection");
+                                   Connections.getINSTANCE().update();
+                                   output.setText("Friend Added");
+                               } else {
+                                   Log.e("PARSE-SAVE", e.getMessage());
+                               }
+                           }
+                       });
+                   } else if(e != null) {
+                       Log.e("PARSE-QUERY", e.getMessage());
+                   } else {
+                       Log.i("PARSE-QUERY", "Found nothing");
+                   }
+               }
+           }
+        );
     }
 }

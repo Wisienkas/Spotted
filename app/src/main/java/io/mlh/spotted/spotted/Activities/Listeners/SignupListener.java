@@ -1,12 +1,8 @@
 package io.mlh.spotted.spotted.Activities.Listeners;
 
 import android.app.AlertDialog;
-import android.app.Application;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -23,23 +19,27 @@ import io.mlh.spotted.spotted.Model.User;
  */
 public class SignupListener implements View.OnClickListener {
 
-    final EditText usernameTextfield;
-    final EditText passwordTextfield;
+    final EditText sName;
+    final EditText sEmail;
+    final EditText sPassword;
     final Context context;
 
-    public SignupListener(EditText usernameTextfield, EditText passwordTextfield, Context context) {
-        this.usernameTextfield = usernameTextfield;
-        this.passwordTextfield = passwordTextfield;
+    public SignupListener(EditText sName, EditText sEmail, EditText sPassword, Context context) {
+        this.sName = sName;
+        this.sEmail = sEmail;
+        this.sPassword = sPassword;
         this.context = context;
     }
 
     @Override
     public void onClick(View v) {
         final ParseUser user = new ParseUser();
-        String email = usernameTextfield.getText().toString();
+        String name = sName.getText().toString();
+        String email = sEmail.getText().toString();
+        user.setUsername(name);
         user.setEmail(email);
         user.setUsername(email);
-        user.setPassword(passwordTextfield.getText().toString());
+        user.setPassword(sPassword.getText().toString());
 
         user.signUpInBackground(new SignUpCallback() {
             @Override
@@ -70,7 +70,7 @@ public class SignupListener implements View.OnClickListener {
                 .setNeutralButton("Affirmative!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SignupListener.this.passwordTextfield.setText("");
+                        SignupListener.this.sPassword.setText("");
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)

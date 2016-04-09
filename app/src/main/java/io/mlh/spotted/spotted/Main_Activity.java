@@ -4,15 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.parse.Parse;
 
 import io.mlh.spotted.spotted.Activities.Listeners.LoginListener;
 import io.mlh.spotted.spotted.Activities.Listeners.SignupListener;
 import io.mlh.spotted.spotted.Activities.callback.ActivityLink;
 
-public class Main_Activity extends AppCompatActivity implements ActivityLink {
+public class Main_Activity extends AppCompatActivity implements ActivityLink{
 
     private EditText passwordField;
     private EditText usernameField; // Email used here
@@ -27,13 +29,20 @@ public class Main_Activity extends AppCompatActivity implements ActivityLink {
         this.usernameField = (EditText) findViewById(R.id.username_input);
         this.passwordField = (EditText) findViewById(R.id.password_input);
         this.loginButton = (Button) findViewById(R.id.login_button);
-        this.signupButton = (Button) findViewById(R.id.signup_button);
+        this.signupButton = (Button) findViewById(R.id.signup_redirect);
 
-        // Adding Signup
         this.loginButton.setOnClickListener(
                 new LoginListener(this.usernameField, this.passwordField, this));
-        this.signupButton.setOnClickListener(
-                new SignupListener(this.usernameField, this.passwordField, getApplicationContext()));
+        this.signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main_Activity.this, Signup_Activity.class);
+                //intent.putExtra("username", emailField.getText().toString());
+                startActivity(intent);
+            }
+        });
+        // Redirect to Signup activity
+        //this.signupRedirect.setOnClickListener();
     }
 
     @Override
@@ -43,7 +52,7 @@ public class Main_Activity extends AppCompatActivity implements ActivityLink {
 
     @Override
     public void startActivity() {
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
+        //getSystemService(Context.LOCATION_SERVICE);
+        startActivity(new Intent(this,  MenuActivity.class));
     }
 }
