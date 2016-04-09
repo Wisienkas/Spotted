@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.parse.Parse;
+
+import io.mlh.spotted.spotted.Activities.Listeners.LoginListener;
+import io.mlh.spotted.spotted.Activities.Listeners.SignupListener;
+
 public class Main_Activity extends AppCompatActivity {
 
     private EditText passwordField;
@@ -23,6 +28,9 @@ public class Main_Activity extends AppCompatActivity {
         this.signupButton = (Button) findViewById(R.id.signup_button);
 
         // Adding Signup
-        //this.loginButton.setOnClickListener();
+        this.loginButton.setOnClickListener(
+                new LoginListener(this.usernameField, this.passwordField, getApplicationContext()));
+        this.signupButton.setOnClickListener(
+                new SignupListener(this.usernameField, this.passwordField, getApplicationContext()));
     }
 }
