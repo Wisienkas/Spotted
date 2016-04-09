@@ -61,6 +61,7 @@ public class SignupListener implements View.OnClickListener {
         });
     }
 
+    // TODO Fix this piece, it chrashes the app
     @Deprecated
     private void showSignupError(ParseException e) {
         new AlertDialog.Builder(context)

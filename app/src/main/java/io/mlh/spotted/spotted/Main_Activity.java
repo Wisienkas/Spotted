@@ -1,19 +1,19 @@
 package io.mlh.spotted.spotted;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.parse.Parse;
+
 import io.mlh.spotted.spotted.Activities.Listeners.LoginListener;
+import io.mlh.spotted.spotted.Activities.Listeners.SignupListener;
 
 public class Main_Activity extends AppCompatActivity {
 
-
-    private EditText usernameField;
     private EditText passwordField;
+    private EditText usernameField; // Email used here
     private Button loginButton;
     private Button signupButton;
 
@@ -22,11 +22,10 @@ public class Main_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.usernameField = (EditText) findViewById(R.id.username_input);
+        this.passwordField = (EditText) findViewById(R.id.password_input);
         this.loginButton = (Button) findViewById(R.id.login_button);
         this.signupButton = (Button) findViewById(R.id.signup_redirect);
-        this.usernameField = (EditText)findViewById(R.id.login_name) ;
-        this.passwordField = (EditText)findViewById(R.id.login_password) ;
-
 
         this.loginButton.setOnClickListener(
                 new LoginListener(this.usernameField, this.passwordField, getApplicationContext()));
@@ -39,6 +38,5 @@ public class Main_Activity extends AppCompatActivity {
             }
         });
         // Redirect to Signup activity
-        //this.signupRedirect.setOnClickListener();
-    }
+        //this.signupRedirect.setOnClickListener();    }
 }

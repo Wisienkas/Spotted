@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.parse.Parse;
 
+import io.mlh.spotted.spotted.Model.User;
+
 /**
  * Created by wisienkas on 4/9/16.
  */
