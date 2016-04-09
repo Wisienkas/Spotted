@@ -7,8 +7,10 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -45,31 +47,33 @@ public class SignupListener implements View.OnClickListener {
                 if(e == null) {
                     if(user.isAuthenticated()) {
                         User.user = user;
+                        Toast.makeText(context,
+                                "Signed Up!",
+                                Toast.LENGTH_SHORT)
+                                .show();
+                        Log.i("SPOTTED-PARSE", "User Signed up as: " + user.getUsername() + " Session Key: " + user.getSessionToken());
                     }
                 } else {
-
+                    Log.e("Not Signed Up!!", e.getMessage());
+                    //showSignupError(e);
                 }
             }
         });
     }
 
-    public static class SignupErrorDialog extends DialogFragment {
-
-        public ParseException e;
-        public EditText passwordTextfield;
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            CharSequence msg = "Signup failed, see Msg: " + (e == null ? "UNKNWON" : e.getMessage());
-            builder.setMessage(msg)
-                    .setNeutralButton("Affirmative!", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            passwordTextfield.setText("");
-                        }
-                    });
-            return builder.create();
-        }
+    @Deprecated
+    private void showSignupError(ParseException e) {
+        new AlertDialog.Builder(context)
+                .setTitle("Signup Failed")
+                .setMessage("Signup failed, see Msg: " + e.getMessage())
+                .setNeutralButton("Affirmative!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SignupListener.this.passwordTextfield.setText("");
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
+
 }
