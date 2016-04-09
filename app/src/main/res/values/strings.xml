@@ -4,4 +4,8 @@
     <string name="email_username">Email (username)</string>
     <string name="signup_text">You can sign up or go home!</string>
     <string name="login_button_text">Login!</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_email">E-mail</string>
+    <string name="registerButton">Register</string>
 </resources>
