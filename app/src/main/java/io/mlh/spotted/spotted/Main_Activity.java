@@ -1,14 +1,10 @@
 package io.mlh.spotted.spotted;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.LocationManager;
-import android.os.Looper;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,10 +14,9 @@ import com.parse.Parse;
 
 import io.mlh.spotted.spotted.Activities.Listeners.GPSListener;
 import io.mlh.spotted.spotted.Activities.Listeners.LoginListener;
-import io.mlh.spotted.spotted.Activities.Listeners.SignupListener;
 import io.mlh.spotted.spotted.Activities.callback.ActivityLink;
 
-public class Main_Activity extends AppCompatActivity implements ActivityLink {
+public class Main_Activity extends Activity implements ActivityLink {
 
     /**
      * Will Decide how often the gps updates can happen at the fastest
@@ -88,4 +83,5 @@ public class Main_Activity extends AppCompatActivity implements ActivityLink {
 //            startActivity(new Intent(this,  MenuActivity.class));
 //        }
     }
+
 }

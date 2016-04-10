@@ -24,4 +24,15 @@
     <string name="hint_password">Password</string>
     <string name="hint_email">E-mail</string>
 
+    <color name="backgroundcolor">#AAAAAA</color>
+
+    <!-- Tutorial strings -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tutorial_1_1">Add your festivals by entering the ticket number and load the festival map</string>
+    <string name="tutorial_2_1">Add your friends for each festival to be able to find them</string>
+    <string name="tutorial_3_1">Hey party people! In order to find your friends and let them find you, we will need you to keep your Wi-fi and GPS active during the festival.</string>
+    <string name="tutorial_1_2">Add your festival</string>
+    <string name="tutorial_2_2">Add your pack</string>
+    <string name="tutorial_3_2">Music unites us all</string>
+
 </resources>
