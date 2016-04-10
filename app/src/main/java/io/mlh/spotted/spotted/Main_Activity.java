@@ -1,14 +1,9 @@
 package io.mlh.spotted.spotted;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.parse.Parse;
-
-import io.mlh.spotted.spotted.Activities.Listeners.LoginListener;
-import io.mlh.spotted.spotted.Activities.Listeners.SignupListener;
 
 public class Main_Activity extends AppCompatActivity {
 
@@ -21,7 +16,7 @@ public class Main_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+/*
         this.usernameField = (EditText) findViewById(R.id.username_input);
         this.passwordField = (EditText) findViewById(R.id.password_input);
         this.loginButton = (Button) findViewById(R.id.login_button);
@@ -35,8 +30,9 @@ public class Main_Activity extends AppCompatActivity {
                 Intent intent = new Intent(Main_Activity.this, Signup_Activity.class);
                 //intent.putExtra("username", emailField.getText().toString());
                 startActivity(intent);
-            }
+
         });
         // Redirect to Signup activity
-        //this.signupRedirect.setOnClickListener();    }
+        //this.signupRedirect.setOnClickListener();  */  }
+
 }
