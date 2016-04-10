@@ -9,6 +9,8 @@
     <string name="menu_map_text">Watch Map</string>
     <string name="menu_configure_profile_text">Configure Profile</string>
 
+    <string name="friend_search_button_text">Add Friend</string>
+
     <!--Login fields -->
     <string name="login_name">Username</string>
     <string name="login_password">Password</string>

@@ -1,6 +1,7 @@
 package io.mlh.spotted.spotted.Activities.Listeners;
 
 import android.content.Intent;
+import android.location.LocationManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;

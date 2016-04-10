@@ -1,11 +1,20 @@
 package io.mlh.spotted.spotted;
 
-import android.os.Bundle;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Main_Activity extends AppCompatActivity {
+import com.parse.Parse;
+
+import io.mlh.spotted.spotted.Activities.Listeners.LoginListener;
+import io.mlh.spotted.spotted.Activities.Listeners.SignupListener;
+import io.mlh.spotted.spotted.Activities.callback.ActivityLink;
+
+public class Main_Activity extends AppCompatActivity implements ActivityLink{
 
     private EditText passwordField;
     private EditText usernameField; // Email used here
@@ -16,7 +25,7 @@ public class Main_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
+
         this.usernameField = (EditText) findViewById(R.id.username_input);
         this.passwordField = (EditText) findViewById(R.id.password_input);
         this.loginButton = (Button) findViewById(R.id.login_button);
@@ -30,9 +39,21 @@ public class Main_Activity extends AppCompatActivity {
                 Intent intent = new Intent(Main_Activity.this, Signup_Activity.class);
                 //intent.putExtra("username", emailField.getText().toString());
                 startActivity(intent);
-
+            }
         });
         // Redirect to Signup activity
-        //this.signupRedirect.setOnClickListener();  */  }
+        //this.signupRedirect.setOnClickListener();
+    }
+
+    @Override
+    public Context fetchContext() {
+        return this;
+    }
+
+    @Override
+    public void startActivity() {
+        //getSystemService(Context.LOCATION_SERVICE);
+        startActivity(new Intent(this,  MenuActivity.class));
+    }
 
 }
