@@ -1,7 +1,13 @@
 package io.mlh.spotted.spotted;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.LocationManager;
+import android.os.Looper;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,16 +16,30 @@ import android.widget.EditText;
 
 import com.parse.Parse;
 
+import io.mlh.spotted.spotted.Activities.Listeners.GPSListener;
 import io.mlh.spotted.spotted.Activities.Listeners.LoginListener;
 import io.mlh.spotted.spotted.Activities.Listeners.SignupListener;
 import io.mlh.spotted.spotted.Activities.callback.ActivityLink;
 
-public class Main_Activity extends AppCompatActivity implements ActivityLink{
+public class Main_Activity extends AppCompatActivity implements ActivityLink {
+
+    /**
+     * Will Decide how often the gps updates can happen at the fastest
+     * in milliseconds
+     */
+    private final long GPS_MIN_TIME_UPDATE = 100 * 1000;
+    /**
+     * The minimum distance in meters the phone has to move according
+     * to the gps in order to trigger an update
+     */
+    private final long GPS_MIN_DISTANCE_UPDATE = 25;
 
     private EditText passwordField;
     private EditText usernameField; // Email used here
     private Button loginButton;
     private Button signupButton;
+    private LocationManager locationManager;
+    private GPSListener gpsListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +72,20 @@ public class Main_Activity extends AppCompatActivity implements ActivityLink{
 
     @Override
     public void startActivity() {
-        //getSystemService(Context.LOCATION_SERVICE);
-        startActivity(new Intent(this,  MenuActivity.class));
+        startActivity(new Intent(this, MenuActivity.class));
+//        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        Criteria criteria = new Criteria();
+//        criteria.setAccuracy(Criteria.ACCURACY_MEDIUM);
+//        gpsListener = new GPSListener();
+//
+//        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+//            locationManager.requestLocationUpdates(
+//                    GPS_MIN_TIME_UPDATE,
+//                    GPS_MIN_DISTANCE_UPDATE,
+//                    criteria,
+//                    gpsListener,
+//                    Looper.getMainLooper());
+//            startActivity(new Intent(this,  MenuActivity.class));
+//        }
     }
 }

@@ -14,7 +14,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void gotoMap(View view) {
-
+        startActivity(new Intent(this, MapActivity.class));
     }
 
     public void gotoConfig(View view) {
