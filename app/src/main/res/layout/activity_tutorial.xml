@@ -8,7 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="io.mlh.spotted.spotted.Tutorial_Activity"
-    android:background="#BBBBBB">
+    android:background="#BBBBBB"
+    android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
